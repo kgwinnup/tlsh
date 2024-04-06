@@ -81,7 +81,7 @@ export class Tlsh {
     qRatio = 0;
     q1Ratio = 0;
     q2Ratio = 0;
-    code = new Uint8Array(CODE_SIZE).fill(0);
+    code: Uint8Array = new Uint8Array(CODE_SIZE).fill(0);
     complete = false;
 
     /**
