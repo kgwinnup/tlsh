@@ -1,0 +1,9 @@
+{
+  "tasks": {
+    "dev": "deno run --watch tlsh.ts"
+  },
+  "fmt": {
+    "lineWidth": 120,
+    "indentWidth": 4
+  }
+}
