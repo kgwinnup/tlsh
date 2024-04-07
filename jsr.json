@@ -1,5 +1,6 @@
 {
     "name": "@kgwinnup/tlsh",
-    "version": "1.0.0",
+    "description": "TLSH and TLSH search tree implementations in typescript",
+    "version": "1.0.1",
     "exports": "./mod.ts"
 }
