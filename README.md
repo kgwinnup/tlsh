@@ -1,4 +1,6 @@
-# TLSH-TS
+# Tlsh and Tlsh search tree
+
+[![JSR](https://jsr.io/badges/@kgwinnup/tlsh)](https://jsr.io/@kgwinnup/tlsh)
 
 TLSH-TS is a Trendmicro Locality Sensitive Hashing (TLSH)
 implementation in pure Typescript. Additionally, there is a TLSH tree

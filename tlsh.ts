@@ -185,6 +185,11 @@ export class Tlsh {
         return tlsh;
     }
 
+    /**
+     * diff takes in a second Tlsh object and calculates the difference or distance between the two Tlsh objects.
+     * @param b second Tlsh object
+     * @returns number, the distance between the two Tlsh objects
+     */
     diff(b: Tlsh): number {
         let diff = 0;
 
@@ -211,6 +216,10 @@ export class Tlsh {
         return diff;
     }
 
+    /**
+     * toString converts the Tlsh object into its string representation
+     * @returns string
+     */
     toString(): string {
         let buf = "";
         if (!this.complete) {
