@@ -442,19 +442,12 @@ export class TreeNode {
     }
 }
 
-class SplitResult {
-    left: Array<Tlsh> = [];
-    right: Array<Tlsh> = [];
+type SplitResult = {
+    left: Array<Tlsh>;
+    right: Array<Tlsh>;
     splitKey: Tlsh;
     splitPoint: number;
-
-    constructor(left: Array<Tlsh>, right: Array<Tlsh>, splitKey: Tlsh, splitPoint: number) {
-        this.left = left;
-        this.right = right;
-        this.splitKey = splitKey;
-        this.splitPoint = splitPoint;
-    }
-}
+};
 
 export class TlshTree {
     public size = 0;
@@ -482,6 +475,10 @@ export class TlshTree {
         this.node = this.build(tlshList, leafSize);
     }
 
+    /**
+     * dump will create a pretty string representation of the entire tree
+     * @returns string
+     */
     dump(): string {
         let out = "";
         const _dump = (space: string, node: TreeNode) => {
@@ -584,6 +581,9 @@ export class TlshTree {
         return _search(this.node, tlsh, distance);
     }
 
+    /**
+     * build is the entry point for building the Tlsh tree
+     */
     private build(tlshList: Array<Tlsh>, leafSize: number): TreeNode {
         const splitResult = this.splitNodes(tlshList, leafSize);
         if (splitResult == undefined) {
@@ -597,6 +597,9 @@ export class TlshTree {
         return new TreeNode(left, right, splitResult.splitPoint, splitResult.splitKey, false, []);
     }
 
+    /** splitNodes will take an array of Tlsh and find an optimial split point such that each partition is at least
+     * `minSplitSize`.
+     */
     private splitNodes(tlshList: Array<Tlsh>, leafSize: number): SplitResult | undefined {
         if (tlshList.length <= leafSize) {
             return undefined;
@@ -608,20 +611,20 @@ export class TlshTree {
 
         for (let i = 0; i < tlshList.length; i++) {
             const splitKey = tlshList[i];
-            const tempLeft = [];
-            const tempRight = [];
+            const left = [];
+            const right = [];
 
             for (let j = 0; j < tlshList.length; j++) {
                 const diff = splitKey.diff(tlshList[j]);
                 if (diff <= splitPoint) {
-                    tempLeft.push(tlshList[j]);
+                    left.push(tlshList[j]);
                 } else {
-                    tempRight.push(tlshList[j]);
+                    right.push(tlshList[j]);
                 }
             }
 
-            if (tempLeft.length > minSplitSize && tempRight.length > minSplitSize) {
-                return new SplitResult(tempLeft, tempRight, splitKey, splitPoint);
+            if (left.length > minSplitSize && right.length > minSplitSize) {
+                return { left, right, splitKey, splitPoint };
             }
 
             splitPoint += jumpSize;
