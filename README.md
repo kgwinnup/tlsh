@@ -6,7 +6,8 @@ TLSH-TS is a TrendMicro Locality Sensitive Hashing (TLSH) implementation in pure
 TLSH tree implementation to index a set of hashes for the purpose of efficient nearest neighbor look-ups.
 
 TLSH is a fuzzy hashing algorithm that has the property of computing a distance metric between two hashes. This distance
-metric is what enables TLSH to construct TLSH trees or indexes for efficient nearest neighbor lookups.
+metric is what enables TLSH to construct TLSH trees or indexes for efficient nearest neighbor lookups in large sets of
+TLSH hashes.
 
 ## References
 
