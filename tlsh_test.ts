@@ -106,3 +106,39 @@ Deno.test("should construct a simple tree with multiple leaf nodes", () => {
     assertEquals(tree.numLeafs, 3);
     assertEquals(tree.size, 25);
 });
+
+Deno.test("should parse and output the same tlsh hashes", () => {
+    const input = [
+        "54456c07b6a214fcc5d6AAAAA26b96b26c70b4a581327d7b349ce6302f52f642b6efe1",
+        "54456c07b6a214fcc5d6c570BBBBB6b26c70b4a581327d7b349ce6302f52f642b6efe2",
+        "54456c07b6a214fcc5d6c570826bCCCCCc70b4a581327d7b349ce6302f52f642b6efe3",
+        "54456c07b6a214fcc5d6c570826b96b2DDDDD4a581327d7b349ce6302f52f642b6efe4",
+        "54456c07b6a214fcc5d6c570826b96b26c70EEEEE1327d7b349ce6302f52f642baaaab",
+        "54456c07b6a214fcc5d6c570826b96b26c70b4a5FFFFFd7b349ce6302f52f642baaaaa",
+        "54456c07b6a214fcc5d6c570826b96b26c70b4a581327AAAAA9ce6302f52f641b6efe1",
+        "54456c07b6a214fcc5d6c570826b96b26c70b4a581327d7b3BBBBB302f52f632b6efe2",
+        "54456c07b6a214fcc5d6c570826b96b26c70b4a581327d7b349ceCCCCC52f643b6efe3",
+        "54456c07b6a214fcc5d6c570826b96b26c70b4a581327d7b349ce6302DDDDD44b6efe4",
+        "54456c07b6a214fcc5d6c570826b96b26c70b4a581327d7b349ce6302f52fEEEEEaaab",
+        "54456c07b6a214fcc5d6c570826b96b26c70b4a581327d7b349ce6302f52f646bFFFFF",
+        "54456c07AAAAA4fcc5d61570826b96b26c70b4a581327d7b349ce6302f52f642b6efe1",
+        "54456c07b6a2BBBBB5d62570826b96b26c70b4a581327d7b349ce6302f52f642b6efe2",
+        "54456c07b6a214fcCCCCC570826b96b26c70b4a581327d7b349ce6302f52f642b6efe3",
+        "54456c07b6a214fcc5d6DDDDD26b96b26c70b4a581327d7b349ce6302f52f642b6efe4",
+        "54456c07b6a214fcc5d65570EEEEE6b26c70b4a581327d7b349ce6302f52f642baaaab",
+        "54456c07b6a214fcc5d66570826bFFFFFc70b4a581327d7b349ce6302f52f642baaaaa",
+        "54456c07b6a214fcc5d6c570826b96b26AAAAAa581327d7b349ce6302f52f641b6efe1",
+        "54456c07b6a214fcc5d6c570826b96b26c70bBBBBB327d7b349ce6302f52f632b6efe2",
+        "54456c07b6a214fcc5d6c570826b96b26c70b4a58CCCCC7b349ce6302f52f643b6efe3",
+        "54456c07b6a214fcc5d6c570826b96b26c70b4a581327DDDDD9ce6302f52f644b6efe4",
+        "54456c07b6a214fcc5d6c570826b96b26c70b4a581327d7b3EEEEE302f52f645baaaab",
+        "54456c07b6a214fcc5d6c570826b96b26c70b4a581327d7b349ceFFFFF52f646baaaaa",
+        "54456c07b6a214fcc5d6c570826b96b26c70b4a581327d7b349ce6302f52f642baaaaa",
+    ];
+
+    for (const hash of input) {
+        const tlsh = Tlsh.from(hash);
+        const tlshHash = tlsh.toString().toLowerCase();
+        assertEquals(hash.toLowerCase(), tlshHash);
+    }
+});
